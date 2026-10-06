@@ -3,13 +3,7 @@ import { notFound } from "next/navigation";
 import { BookType } from "../../types";
 import ReadButton from "../../components/BookDetails/ReadButton";
 import WishButton from "../../components/BookDetails/WishButton";
-
-const getBooks = async (): Promise<BookType[]> => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/booksData.json`);
-  if (!res.ok) throw new Error("Failed to fetch books");
-  return res.json();
-};
-
+import booksJson from "@/public/booksData.json";
 interface BookDetailsPageProps {
   params: {
     bookId: string;
@@ -19,7 +13,7 @@ interface BookDetailsPageProps {
 const BookDetailsPage = async ({ params }: BookDetailsPageProps) => {
   const { bookId } = await params;
 
-  const books = await getBooks();
+  const books: BookType[] = booksJson;
   const book = books.find((b) => b.bookId === Number(bookId));
 
   if (!book) notFound();

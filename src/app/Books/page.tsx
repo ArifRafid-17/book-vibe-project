@@ -1,20 +1,11 @@
 import React from "react";
 import { BookType } from "../types";
 import BookCard from "../components/BookCard";
+import booksJson from "@/public/booksData.json";
 
-const getBooks = async () => {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_SERVER_BASE_URL}/booksData.json`);
+const BookPage = () => {
+  const booksData: BookType[] = booksJson;
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch books");
-  }
-
-  return res.json();
-};
-
-const BookPage = async () => {
-  const booksData = await getBooks();
-  console.log(booksData); // Log the fetched data to the console
   return (
     <div>
       <section
@@ -25,7 +16,7 @@ const BookPage = async () => {
           Books
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {booksData.map((book: BookType) => (
+          {booksData.map((book) => (
             <BookCard key={book.bookId} book={book} />
           ))}
         </div>

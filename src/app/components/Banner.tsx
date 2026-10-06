@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import heroBook from "../assets/heroBook.png"; // Replace with your image path in the /public folder
+import heroBook from "../assets/heroBook.png"; 
 
 export default function Banner() {
   return (
